@@ -10,14 +10,10 @@ Natural-language queries about users, jobs, and system state, answered with a **
 
 ## Demo
 
-<img width="1919" height="966" alt="image" src="https://github.com/user-attachments/assets/e9ed6be4-2285-4952-89a1-5455d77efe17" />
-***
-<img width="1918" height="952" alt="image" src="https://github.com/user-attachments/assets/b82b8ba0-4a91-43ca-91cf-db99c1619dbe" />
-***
-<img width="1919" height="973" alt="image" src="https://github.com/user-attachments/assets/717a77af-abf5-4113-886d-a8eab71e2a2c" />
-***
-<img width="1909" height="973" alt="image" src="https://github.com/user-attachments/assets/fe2d9dcf-503f-469d-8cca-818f0d59f7f6" />
-***
+<img width="1600" height="805" alt="WhatsApp Image 2026-04-24 at 11 59 20 AM" src="https://github.com/user-attachments/assets/4c3d3c7e-cbbc-4023-b048-8b1b4911bb12" />
+<img width="1600" height="794" alt="WhatsApp Image 2026-04-24 at 11 59 20 AM (1)" src="https://github.com/user-attachments/assets/40ea4886-8e39-4082-b1e6-16d86e167a9b" />
+<img width="1600" height="811" alt="WhatsApp Image 2026-04-24 at 11 59 20 AM (2)" src="https://github.com/user-attachments/assets/e9ae4ef4-013a-40c6-9904-a807a9e0546f" />
+<img width="1600" height="815" alt="WhatsApp Image 2026-04-24 at 11 59 20 AM (3)" src="https://github.com/user-attachments/assets/e1150f6f-7c3a-42ca-9f5d-7c56a06857f6" />
 
 - **Chat pane** — natural-language input, assistant bubbles with inline action cards.
 - **Reasoning panel** — execution-graph timeline of tool calls with per-step latency.
