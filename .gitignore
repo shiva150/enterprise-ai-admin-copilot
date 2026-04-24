@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+demo/screenshots
+docs/PRD.md
+# Env / secrets
+.env
+.env.local
+*.key
+
+# FAISS generated indices (mock + gemini, both sizes)
+backend/data/faiss_index/
+backend/data/faiss_index_mock/
+backend/data/faiss_index_gemini/
+
+# SQLite (generated from seed)
+*.db
+*.sqlite
+*.sqlite3
+
+# Frontend
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+# compiled tsc output that shadows a .ts source
+frontend/vite.config.js
+frontend/vite.config.d.ts
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Harness / logs
+*.log
+tmp/

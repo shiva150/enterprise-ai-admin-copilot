@@ -1,0 +1,52 @@
+[
+  {
+    "role": "admin",
+    "permissions": ["read_all", "write_all", "manage_users", "manage_roles", "view_audit_logs"],
+    "description": "Full system administrator. Can manage users, roles, and view all audit logs. Granted only to platform operators; changes are logged to the immutable audit trail and reviewed weekly by compliance."
+  },
+  {
+    "role": "manager",
+    "permissions": ["read_team_data", "approve_requests", "view_reports"],
+    "description": "Team manager with read access to team data, report viewing, and request approval. Cannot see cross-team data or modify user records. Sees redacted PII in all reports."
+  },
+  {
+    "role": "engineer",
+    "permissions": ["read_code", "write_code", "deploy_staging", "view_logs"],
+    "description": "Software engineer with code repository and staging deployment access. Cannot deploy to production directly — production pushes require a devops role with a two-person approval."
+  },
+  {
+    "role": "support",
+    "permissions": ["read_users", "reset_passwords", "view_tickets"],
+    "description": "Support agent who can assist users by resetting passwords and viewing tickets. Cannot suspend, reassign roles, or view audit logs. All password resets are logged and emailed to the user."
+  },
+  {
+    "role": "auditor",
+    "permissions": ["read_all", "view_audit_logs", "export_reports"],
+    "description": "Read-only compliance auditor with audit log and reporting access. Exports are watermarked with the auditor's user_id and are disabled for 24 hours after any audit_logs schema change."
+  },
+  {
+    "role": "intern",
+    "permissions": ["read_public_docs"],
+    "description": "Limited intern access. Public documentation only. Cannot view user data, logs, jobs, or configuration. Access auto-expires 90 days after onboarding unless renewed by a manager."
+  },
+  {
+    "role": "devops",
+    "permissions": ["deploy_prod", "manage_infrastructure", "view_logs", "restart_services", "rotate_secrets"],
+    "description": "DevOps engineer responsible for production deployments and infrastructure. Required for restart_job, cache invalidation, and rotate_secrets actions. Production deploys require a second devops approval via the two-person rule."
+  },
+  {
+    "role": "security_admin",
+    "permissions": ["view_audit_logs", "manage_policies", "suspend_users", "review_access", "read_all"],
+    "description": "Security administrator who reviews access anomalies, suspends compromised accounts, and maintains RBAC policy definitions. All suspend/unsuspend actions are logged with a justification field."
+  },
+  {
+    "role": "analyst",
+    "permissions": ["read_reports", "run_queries", "export_data"],
+    "description": "Data analyst with read access to the analytics warehouse and reporting tools. Queries are rate-limited to protect the primary replica. Cannot view raw PII; all analyst queries receive redacted output."
+  },
+  {
+    "role": "viewer",
+    "permissions": ["read_public_dashboards"],
+    "description": "External stakeholder with view-only access to public dashboards. Cannot see internal logs, user data, or reports. Useful for partner demos and investor updates."
+  }
+]

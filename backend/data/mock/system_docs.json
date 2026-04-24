@@ -1,0 +1,52 @@
+[
+  {
+    "service": "auth-service",
+    "topic": "login failures",
+    "content": "Users report login failures when their SSO session expires or when their role has been suspended. Check users.status for 'suspended' state and check recent role changes in the audit log. Common signatures: 'account suspended', 'invalid credentials', 'session expired'. Persistent failures across multiple users usually indicate an IdP outage."
+  },
+  {
+    "service": "auth-service",
+    "topic": "access revocation",
+    "content": "Access is revoked when a user is removed from their role group. Revocation propagates within 5 minutes. If a user loses access, check both role membership and the status flag. Revocation is immediate at the auth-service layer but downstream services (reporting-api, etl-pipeline) cache role decisions for up to 5 minutes."
+  },
+  {
+    "service": "etl-pipeline",
+    "topic": "job failure patterns",
+    "content": "ETL jobs frequently fail due to upstream schema drift or temporary database connection issues. Check the error_message field for 'connection refused' or 'column not found' signatures. Schema drift indicates an upstream migration; connection errors are typically transient and resolve with a restart within 30 seconds."
+  },
+  {
+    "service": "etl-pipeline",
+    "topic": "restart procedure",
+    "content": "Failed ETL jobs can be safely restarted when the error is transient (connection issues, timeouts). Schema drift errors require a code fix before restart. Use the trigger_action tool with action='restart_job' and the job_id. Restarts are idempotent — duplicate runs are de-duplicated by the scheduler's watermark table."
+  },
+  {
+    "service": "reporting-api",
+    "topic": "slow queries",
+    "content": "Reporting API latency spikes usually correlate with large time-range queries or missing indexes on the events table. Short term mitigation: ask the user to narrow the time range. Long term: add a covering index on (tenant_id, created_at). p99 target is 800ms; sustained breaches should be escalated to the analytics team."
+  },
+  {
+    "service": "access-control",
+    "topic": "role reassignment",
+    "content": "To reassign a user's role use the trigger_action tool with action='reassign_role', user_id, and new_role. The change takes effect immediately but downstream propagation can take up to 5 minutes. Reassignments to admin/devops/security_admin require a manager approval recorded in the audit log."
+  },
+  {
+    "service": "notification-service",
+    "topic": "delivery failures",
+    "content": "Notification delivery failures are typically caused by invalid recipient addresses, upstream SMTP rate limits, or rendering errors in the template engine. Check the logs for 'bounce' or 'template_error' signatures. Transient SMTP errors auto-retry with exponential backoff up to 3 attempts; permanent failures are dropped to the dead-letter queue for review."
+  },
+  {
+    "service": "security-scanner",
+    "topic": "anomaly detection",
+    "content": "The security scanner flags anomalies based on behavioral baselines: unusual login locations, failed-login spikes, privilege-escalation attempts, and off-hours admin actions. Anomalies above severity=HIGH auto-suspend the user and page the on-call security_admin. Review the anomaly in the audit log before unsuspending."
+  },
+  {
+    "service": "reporting-api",
+    "topic": "index optimization",
+    "content": "When a reporting query is consistently slow, inspect the query plan for sequential scans on the events or audit_logs tables. Covering indexes on (tenant_id, created_at) and (user_id, action, created_at) solve the majority of incidents. Avoid over-indexing — each new index slows writes on the ingest path."
+  },
+  {
+    "service": "billing-service",
+    "topic": "invoice generation failures",
+    "content": "Monthly invoice generation can fail when a tenant record is missing a billing_plan or has a stale payment_method. Inspect billing_service error logs for 'missing_plan' or 'payment_method_expired' signatures. Failed invoices are paused (not retried) until an analyst clears the validation error."
+  }
+]
